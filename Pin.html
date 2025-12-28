@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIN Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            max-width: 350px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        input {
+            font-size: 20px;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .message {
+            margin-top: 20px;
+            display: none;
+            font-size: 16px;
+        }
+
+        /* KONFETI */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            top: -10px;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.7;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Hatama PIN</h2>
+    <input type="password" id="pin" maxlength="5" placeholder="•••••">
+    <button onclick="cekPin()">Hatama</button>
+
+    <div class="message" id="message">
+        <h3>PARABENS🎉🎉🎊</h3>
+        <p>
+            Ita boot susesu atu halo remata jogo ida ne'e..
+            <br><br>
+            🎂 Dosi ida nee representa presente ba ita boot nia susesu,
+            keta haluha atu fahe ita nia susesu ida nee ba ema seluk
+            iha ita nia konta sosial media,
+            <br><br>
+            Obrigadu👍💥
+        </p>
+    </div>
+</div>
+
+<script>
+    function cekPin() {
+        const pinBenar = "77512";
+        const input = document.getElementById("pin").value;
+        const message = document.getElementById("message");
+
+        if (input === pinBenar) {
+            message.style.display = "block";
+            startConfetti();
+        } else {
+            alert("PIN sala!");
+        }
+    }
+
+    function startConfetti() {
+        const colors = ["#f94144", "#f3722c", "#f8961e", "#f9c74f", "#90be6d", "#43aa8b", "#577590", "#9d4edd"];
+        for (let i = 0; i < 150; i++) {
+            const confetti = document.createElement("div");
+            confetti.classList.add("confetti");
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * window.innerWidth + "px";
+            confetti.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            confetti.style.opacity = Math.random();
+            confetti.style.width = confetti.style.height = (Math.random() * 8 + 4) + "px";
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 4000); // hapus confetti setelah 4 detik
+        }
+    }
+</script>
+
+</body>
+</html>
